@@ -3,3 +3,7 @@ config
 config/*
 node_modules
 node_modules/*
+.cache
+.cache/*
+dist
+dist/*
