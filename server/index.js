@@ -1,6 +1,22 @@
-const Koa = require('koa')
-const mongoose = require('mongoose')
+import Koa from 'koa'
+import mongoose from 'mongoose'
 const { connect, initSchemas, initAdmin } = require('./database/init')
+const { resolve } = require('path')
+const R = require('ramda')
+const MIDDLEWARES = ['common', 'parcel', 'router']
+
+const useMiddlewares = (app) => {
+  R.map(
+    R.compose(
+      R.forEachObjIndexed(
+        initWith => initWith(app)
+      ),
+      require,
+      name => resolve(__dirname, `./middlewares/${name}`)
+    )
+  )(MIDDLEWARES)
+}
+
 
 console.log('开始连接数据库');
 (async () => {
@@ -12,11 +28,7 @@ console.log('开始连接数据库');
   // require('./crawler/qiniu')
 
   const app = new Koa()
-
-  app.use(async ctx => {
-    ctx.body = 'Hello World'
-  })
-
+  await useMiddlewares(app)
   app.listen(3002)
   console.log('artifact4u api run on: 127.0.0.3002')
 })()

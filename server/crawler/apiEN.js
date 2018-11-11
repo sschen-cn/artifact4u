@@ -37,6 +37,10 @@ async function fetchCard() {
     card.icon_img = item.ingame_image.default || ''
     card.mana_cost = item.mana_cost || ''
 
+    if (card.ref.length > 0) {
+      card.ref = []
+    }
+
     if(item.references.length > 0) {
       for (let j = 0; j < item.references.length; j++) {
         if (item.references[j].ref_type === 'includes') {
