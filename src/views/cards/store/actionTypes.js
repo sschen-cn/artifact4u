@@ -1,0 +1,1 @@
+export const CHANGE_CARDS_DATA = 'cards/CHANGE_CARDS_DATA'

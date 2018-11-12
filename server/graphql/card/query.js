@@ -1,14 +1,18 @@
 import {
   GraphQLID,
+  GraphQLInt,
   GraphQLList,
+  GraphQLString,
   GraphQLNonNull
 } from 'graphql'
 import {
-  CardType
+  CardType,
+  CardsType
 } from './model'
-import mongoose from 'mongoose'
-
-const Card = mongoose.model('Card')
+import {
+  getCards,
+  getCard
+} from '../../api/card'
 
 const card = {
   type: CardType,
@@ -18,22 +22,37 @@ const card = {
       type: new GraphQLNonNull(GraphQLID)
     }
   },
-  resolve (root, params, options) {
-    return Card.findOne({
-      id: params.id
-    }).exec()
+  async resolve (root, params, options) {
+    const data = await getCard(params.id)
+
+    return data
   }
 }
 
-const cards = {
-  type: new GraphQLList(CardType),
-  args: {},
-  resolve (root, params, options) {
-    return Card.find({}).exec()
+const cardsInfo = {
+  type: CardsType,
+  args: {
+    limit: {
+      name: 'limit',
+      type: GraphQLInt
+    },
+    page: {
+      name: 'page',
+      type: GraphQLInt
+    },
+    type: {
+      name: 'type',
+      type: GraphQLString
+    }
+  },
+  async resolve (root, params, options) {
+    const data = await getCards(params.type, params.limit, params.page)
+    
+    return data
   }
 }
 
 export default {
   card,
-  cards
+  cardsInfo
 }

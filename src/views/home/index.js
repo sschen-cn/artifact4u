@@ -1,13 +1,22 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import './style.sass'
+import Swipper from '../../components/swipper'
+import HotCards from '../../components/hotCards'
 
-export default class Home extends Component {
+class Home extends Component {
   render() {
     return (
-      <div>
-        <h1>首页</h1>
-        <Link to='/detail/1'>详情页</Link>
+      <div className='home_wrapper'>
+        <div className='home_left'>
+          <Swipper />
+        </div>
+        <div className='home_right'>
+          <HotCards />
+        </div>
       </div>
     )
   }
 }
+
+export default Home

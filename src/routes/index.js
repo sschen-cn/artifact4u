@@ -8,7 +8,7 @@ export default [
   },
   {
     name: '详情页',
-    path: '/detail/:id',
-    component: AC(() => import('../views/detail'))
+    path: '/cards',
+    component: AC(() => import('../views/cards'))
   }
 ]

@@ -43,16 +43,41 @@ export let CardType = new GraphQLObjectType({
       type: GraphQLString
     },
     atk: {
-      type: GraphQLString
+      type: GraphQLInt
     },
     hp: {
-      type: GraphQLString
+      type: GraphQLInt
     },
     mana_cost: {
-      type: GraphQLString
+      type: GraphQLInt
     },
     ref: {
       type: new GraphQLList(GraphQLString)
+    }
+  }
+})
+
+export let CardsType = new GraphQLObjectType({
+  name: 'cardsInfo',
+  fields: {
+    cards: {
+      type: new GraphQLList(CardType)
+    },
+    pageInfo: {
+      type: new GraphQLObjectType({
+        name: 'pageInfo',
+        fields: {
+          totalCount: {
+            type: GraphQLInt
+          },
+          pageCount: {
+            type: GraphQLInt
+          },
+          currentPage: {
+            type: GraphQLInt
+          }
+        }
+      })
     }
   }
 })
