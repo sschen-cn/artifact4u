@@ -77,11 +77,61 @@ const uploadToQiniu = async (url, key) => {
       }
       card.save()
     }
-    console.log(`卡牌${card.name_en}更新完毕`);
+
+    if (card.img && !card.img_key) {
+      try {
+        console.log('开始传img')
+        let icon_img_data = await uploadToQiniu(card.img, nanoid() + '.jpg')
+        await timeout(1000)
+        if(icon_img_data.key) {
+          card.img_key = icon_img_data.key
+        }
+      } catch (err) {
+        console.log(err)
+      }
+      card.save()
+    }
+
+    for (let i = 0; i < card.skills.length; i++) {
+      if (card.skills[i].img && !card.skills[i].img_key) {
+        try {
+          console.log('开始传skills[i].img')
+          let icon_img_data = await uploadToQiniu(card.skills[i].img, nanoid() + '.jpg')
+          await timeout(1000)
+          if(icon_img_data.key) {
+            let obj = card.skills[i]
+            obj.img_key = icon_img_data.key
+            card.skills.splice(i, 1, obj)
+          }
+        } catch (err) {
+          console.log(err)
+        }
+        card.save()
+      }
+    }
+
+    for (let i = 0; i < card.refCards.length; i++) {
+      if (card.refCards[i].img && !card.refCards[i].img_key) {
+        try {
+          console.log('开始传refCards[i].img')
+          let icon_img_data = await uploadToQiniu(card.refCards[i].img, nanoid() + '.jpg')
+          await timeout(1000)
+          if(icon_img_data.key) {
+            let obj = card.refCards[i]
+            obj.img_key = icon_img_data.key
+            card.refCards.splice(i, 1, obj)
+          }
+        } catch (err) {
+          console.log(err)
+        }
+        card.save()
+      }
+    }
+    console.log(`卡牌${card.name}更新完毕`);
   }
   // cards.map(async card => {
     
   // })
 
-  console.log('卡牌图片更新完毕')
+  console.log('所有卡牌图片更新完毕')
 })()

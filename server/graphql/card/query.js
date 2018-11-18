@@ -42,12 +42,12 @@ const cardsInfo = {
     },
     type: {
       name: 'type',
-      type: GraphQLString
+      type: new GraphQLList(GraphQLInt)
     }
   },
   async resolve (root, params, options) {
+    console.log(params.type, params.limit, params.page)
     const data = await getCards(params.type, params.limit, params.page)
-    
     return data
   }
 }

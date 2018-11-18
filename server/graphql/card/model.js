@@ -6,6 +6,78 @@ import {
   GraphQLInt
 } from 'graphql'
 
+export let skillsType = new GraphQLObjectType({
+  name: 'skills',
+  fields: {
+    img: {
+      type: GraphQLString
+    },
+    img_key: {
+      type: GraphQLString
+    },
+    title: {
+      type: GraphQLString
+    },
+    skill: {
+      type: GraphQLString
+    },
+    desc: {
+      type: GraphQLString
+    }
+  }
+})
+
+export let refCardsType = new GraphQLObjectType({
+  name: 'refCards',
+  fields: {
+    id: {
+      type: GraphQLInt
+    },
+    name: {
+      type: GraphQLString
+    },
+    img: {
+      type: GraphQLString
+    },
+    img_key: {
+      type: GraphQLString
+    },
+    type: {
+      type: GraphQLInt
+    },
+    color: {
+      type: GraphQLInt
+    },
+    rarity: {
+      type: GraphQLInt
+    },
+    price: {
+      type: GraphQLInt
+    },
+    atk: {
+      type: GraphQLInt
+    },
+    defense: {
+      type: GraphQLInt
+    },
+    hp: {
+      type: GraphQLInt
+    },
+    mana_cost: {
+      type: GraphQLInt
+    },
+    background: {
+      type: GraphQLString
+    },
+    avatar: {
+      type: GraphQLString
+    },
+    desc: {
+      type: GraphQLString
+    }
+  }
+})
+
 export let CardType = new GraphQLObjectType({
   name: 'Card',
   fields: {
@@ -27,10 +99,13 @@ export let CardType = new GraphQLObjectType({
     desc_en: {
       type: GraphQLString
     },
-    type: {
-      type: GraphQLString
+    type_id: {
+      type: GraphQLInt
     },
     type_en: {
+      type: GraphQLString
+    },
+    color: {
       type: GraphQLString
     },
     large_img_key: {
@@ -42,6 +117,12 @@ export let CardType = new GraphQLObjectType({
     icon_img_key: {
       type: GraphQLString
     },
+    img: {
+      type: GraphQLString
+    },
+    img_key: {
+      type: GraphQLString
+    },
     atk: {
       type: GraphQLInt
     },
@@ -50,6 +131,12 @@ export let CardType = new GraphQLObjectType({
     },
     mana_cost: {
       type: GraphQLInt
+    },
+    skills: {
+      type: new GraphQLList(skillsType)
+    },
+    refCards: {
+      type: new GraphQLList(refCardsType)
     },
     ref: {
       type: new GraphQLList(GraphQLString)

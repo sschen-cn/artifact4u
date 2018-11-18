@@ -4,17 +4,16 @@ const ObjectId = Schema.Types.ObjectId
 
 const cardSchema = new Schema({
   id: {
-    unique: true,
     type: Number
   },
 
-  nmae: String,
+  name: String,
   name_en: String,
 
   desc: String,
   desc_en: String,
 
-  type: String,
+  type_id: Number,
   type_en: String,
 
   large_img: String,
@@ -25,15 +24,43 @@ const cardSchema = new Schema({
   icon_img_key:String,
 
   author: String,
-  color: String,
-  rarity: String,
+  color: Number,
+  rarity: Number,
+  price: Number,
+  img: String,
+  img_key: String,
 
-  atk: String,
-  hp: String,
-  mana_cost: String,
-
+  atk: Number,
+  hp: Number,
+  mana_cost: Number,
 
   ref: [String],
+
+  skills: [],
+  refCards: [],
+
+  // skills: {
+  //   img: String,
+  //   title: String,
+  //   skill: Number,
+  //   desc: String
+  // },
+  // refCards: {
+  //   id: Number,
+  //   name: String,
+  //   img: String,
+  //   type: Number,
+  //   color: Number,
+  //   rarity: Number,
+  //   price: Number,
+  //   atk: Number,
+  //   defense: Number,
+  //   hp: Number,
+  //   mana_cost: Number,
+  //   background: String,
+  //   avatar: String,
+  //   desc: String
+  // },
 
   meta: {
     createdAt: {

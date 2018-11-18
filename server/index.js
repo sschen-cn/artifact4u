@@ -4,6 +4,7 @@ const { connect, initSchemas, initAdmin } = require('./database/init')
 const { resolve } = require('path')
 const R = require('ramda')
 const MIDDLEWARES = ['common', 'parcel', 'router']
+// const MIDDLEWARES = ['common', 'router']
 
 const useMiddlewares = (app) => {
   R.map(
@@ -25,7 +26,9 @@ console.log('开始连接数据库');
   initSchemas()
 
   // require('./crawler/apiEN')
+  // require('./crawler/apiCN')
   // require('./crawler/qiniu')
+  // require('./crawler/dataDeal')
 
   const app = new Koa()
   await useMiddlewares(app)

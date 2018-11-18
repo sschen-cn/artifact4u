@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const db = 'mongodb://localhost/artifact-card'
+const db = 'mongodb://localhost/artifact'
 const glob = require('glob')
 const {
   resolve

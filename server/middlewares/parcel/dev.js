@@ -7,8 +7,7 @@ const r = path => resolve(__dirname, path)
 
 const bundler = new Bundler(r('../../../src/index.html'), {
   publicUrl: '/',
-  watch: true,
-  minify: true
+  watch: true
 })
 
 exports.dev = async app => {
